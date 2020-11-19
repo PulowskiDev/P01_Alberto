@@ -104,94 +104,117 @@ const letras = ['T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F',
 document.getElementById('formu').addEventListener('submit', (e) => {
     e.preventDefault();
 
-    let letra;
-    const dni = document.getElementById('dni').value;
-    const letraDni = document.getElementById('letraDni').value.toUpperCase();
+    let dni = document.getElementById('dni').value;
+    let letraDni = document.getElementById('letraDni').value.toUpperCase();
+
     if (dni < 0 || dni > 99999999) {
-        alert('Debe introducir un numero comprendido entre 0 y 99999999');
+        alert('Numero no reconocido');
+        document.getElementById('dni').value = '';
+        document.getElementById('letraDni').value = '';
     } else {
-        switch (dni % 23) {
-            case 0:
-                letra = letras[0];
-                break;
-            case 1:
-                letra = letras[1];
-                break;
-            case 2:
-                letra = letras[2];
-                break;
-            case 3:
-                letra = letras[3];
-                break;
-            case 4:
-                letra = letras[4];
-                break;
-            case 5:
-                letra = letras[5];
-                break;
-            case 6:
-                letra = letras[6];
-                break;
-            case 7:
-                letra = letras[7];
-                break;
-            case 8:
-                letra = letras[8];
-                break;
-            case 9:
-                letra = letras[9];
-                break;
-            case 10:
-                letra = letras[10];
-                break;
-            case 11:
-                letra = letras[11];
-                break;
-            case 12:
-                letra = letras[12];
-                break;
-            case 13:
-                letra = letras[13];
-                break;
-            case 14:
-                letra = letras[14];
-                break;
-            case 15:
-                letra = letras[15];
-                break;
-            case 16:
-                letra = letras[16];
-                break;
-            case 17:
-                letra = letras[17];
-                break;
-            case 18:
-                letra = letras[18];
-                break;
-            case 19:
-                letra = letras[19];
-                break;
-            case 20:
-                letra = letras[20];
-                break;
-            case 21:
-                letra = letras[21];
-                break;
-            case 22:
-                letra = letras[22];
-                break;
-            case 23:
-                letra = letras[23];
-                break;
-            case 24:
-                letra = letras[24];
-                break;
-        }
-        if(letra == letraDni){
+        let letra = letras[dni % 23];
+        if (letraDni === letra) {
             alert(`\u00A1Coinciden!\n${dni}-${letra}`);
-        }else{
-            alert(`La letra no coincide con la de su DNI`);
-        }   
+        } else {
+            document.getElementById('letraDni').value = '';
+            alert('La letra que ha introducido no coincide');
+        }
     }
 });
+
+//Ejercicio 7
+let numero = 10;
+let n = 1;
+for (i = 1; i <= numero; i++) {
+    n *= i;
+}
+console.log(n);
+
+//Ejercicio 8
+const numEntero = window.prompt('Introduzca un entero');
+const ejeOcho = (entero) => {
+    if (entero % 2 === 0) {
+        console.log('El numero es par');
+    } else {
+        console.log('El numero es impar');
+    }
+}
+ejeOcho(numEntero);
+
+//Ejercicio 9
+let min = /[a-z]+/g;
+let may = /[A-Z]+/g;
+let mezcla = /[A-Z][a-z]+/g;
+const mayusMinus = (texto) => {
+    if (texto.search(may) && !texto.search(min)) {
+        console.log('El texto solo contiene minusculas');
+    } else if (texto.search(min) & !texto.search(may)) {
+        console.log('Texto solo contiene mayusculas');
+    } else {
+        console.log('Texto contiene mayusculas y minusculas');
+    }
+}
+mayusMinus(numEntero);
+
+//Ejercicio 10
+const palindromo = (texto) => {
+    let textoSin = texto.trim().toLowerCase();
+    let textoArray = textoSin.split('');
+    let textoReverse = textoArray.reverse();
+    let ok = true;
+
+    textoArray.forEach((letra,indice) => {
+        if(letra == textoReverse[indice]){
+            ok = true;
+        }else{
+            ok = false;
+        }
+    });
+    return ok;
+}
+
+let frase = 'La ruta nos aporto otro paso natural';
+console.log(`El texto es palindromo? ${palindromo(frase)}`);
+
+//Ejercicio 11
+class Persona{
+    constructor(nombre, edad, genero){
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
+    }
+
+    //Methods
+    obtDetalles(){};
+}
+
+class Estudiante extends Persona{
+    constructor(curso, grupo, nombre, edad, genero){
+        super(nombre, edad, genero);
+        this.curso = curso;
+        this.grupo = grupo;
+    }
+
+    //Methods
+    registrar(){};
+}
+
+class Profesor extends Persona{
+    constructor(asignatura, nivel, nombre, edad, genero){
+        super(nombre, edad, genero);
+        this.asignatura = asignatura;
+        this.nivel = nivel;
+    }
+
+    //Methods
+    asignar(){};
+}
+
+var alumno1 = new Estudiante('Primero', 'A', 'Eduardo', 21, 'M');
+var profesor1 = new Profesor('Matematicas', 'Avanzado', 'Maria', 38, 'F');
+console.log(`El alumno ${alumno1.nombre} tiene como profesora a ${profesor1.nombre} `
+            + `y tienen una diferencia de edad de ${profesor1.edad - alumno1.edad} `
+            + `a\u00F1os`);
+
+//Ejercicio 12            
 
